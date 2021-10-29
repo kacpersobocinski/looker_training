@@ -129,7 +129,7 @@ view: order_items {
   }
 
   measure: cumulative_total_sells {
-    label: "Total Sell Price"
+    label: "Running Total Sells"
     type: running_total
     sql: ${sale_price} ;;
     value_format_name: usd
