@@ -84,6 +84,28 @@ view: users {
     sql: ${TABLE}."ZIP" ;;
   }
 
+  # HOMEWORK DIMENTIONS
+
+  dimension: full_name {
+    label: "Full Name"
+    type: string
+    sql: ${first_name}_name} || ' ' || ${last_name};;
+  }
+
+  dimension: age_bins {
+    label: "Age Group"
+    type: bin
+    bins: [18, 25, 35, 45, 55, 65, 75, 90]
+    style: integer
+    sql: ${age} ;;
+  }
+
+  dimension: city_state {
+    label: "City with State"
+    type: string
+    sql: ${city} || ', ' || ${state} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, last_name, first_name, events.count, order_items.count]

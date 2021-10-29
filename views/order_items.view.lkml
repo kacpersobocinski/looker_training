@@ -92,18 +92,57 @@ view: order_items {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+  #  HOMEWORK dimentions
+
+  dimension_group: shipping_days {
+    type: duration
+    intervals: [day]
+    sql_start: ${shipped_raw} ;;
+    sql_end: ${delivered_raw} ;;
+  }
+
+  dimension:  is_returned {
+    label: "Returned Flag"
+    type: yesno
+    sql: ${returned_date} IS NOT NULL ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
 
-  # ----- Sets of fields for drilling ------
+  # HOMEWORK measures
+
+  measure: total_sell_price {
+    label: "Total Sell Price"
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: average_sell_price {
+    label: "Average Sell Price"
+    type: average
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: cumulative_total_sells {
+    label: "Total Sell Price"
+    type: running_total
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  # ----- Sets of fields for count drilling ------
   set: detail {
     fields: [
       id,
       inventory_items.product_name,
       inventory_items.id,
       users.last_name,
+      users.full_name,
       users.id,
       users.first_name
     ]
