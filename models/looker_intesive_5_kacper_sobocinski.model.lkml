@@ -12,7 +12,7 @@ persist_with: looker_intesive_5_kacper_sobocinski_default_datagroup
 
 
 explore: order_items {
-  label: "Training Explore - Homework 1"
+  label: "Orders with details"
   view_label: "Orders"
   join: inventory_items {
     view_label: "Inventory Items"
@@ -34,5 +34,4 @@ explore: order_items {
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
-
 }
