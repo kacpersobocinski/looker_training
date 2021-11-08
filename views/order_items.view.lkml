@@ -181,7 +181,7 @@ view: order_items {
     group_label: "Rates"
     description: "Gross Margin Percentage of sold items - cancelled and returned orders excluded"
     type: number
-    sql: ${total_gross_margin_amount}/${total_gross_revenue} ;;
+    sql: ${total_gross_margin_amount}/NULLIF(${total_gross_revenue}, 0) ;;
     value_format_name: percent_2
     drill_fields: [detail*]
   }
@@ -199,7 +199,7 @@ view: order_items {
     group_label: "Rates"
     description: "Ruturn Rate of Items Sold - excluding cancelled"
     type: number
-    sql: ${number_of_items_returned}/${count} ;;
+    sql: ${number_of_items_returned}/NULLIF(${count}, 0) ;;
     value_format_name: percent_2
   }
 
@@ -218,7 +218,7 @@ view: order_items {
     group_label: "Rates"
     description: "Percentage of users returning items"
     type: number
-    sql: ${number_of_customers_returning_items}/${users.count} ;;
+    sql: ${number_of_customers_returning_items}/NULLIF(${users.count}, 0) ;;
     value_format_name: percent_2
     drill_fields: [detail*]
   }
@@ -228,7 +228,7 @@ view: order_items {
     group_label: "Averages"
     description: "Average USD sped per customer"
     type: number
-    sql: ${total_gross_revenue}/${users.count_distinct} ;;
+    sql: ${total_gross_revenue}/NULLIF(${users.count_distinct}, 0) ;;
     value_format_name: usd
     drill_fields: [detail*]
   }
