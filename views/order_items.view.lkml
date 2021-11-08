@@ -171,7 +171,7 @@ view: order_items {
     group_label: "Averages"
     description: "Average Gross Margin of sold items - cancelled and returned orders excluded"
     type: number
-    sql: ${sale_price} - ${inventory_items.cost} ;;
+    sql: ${total_gross_revenue} - ${inventory_items.total_cost} ;;
     value_format_name: usd
     drill_fields: [detail*]
   }
