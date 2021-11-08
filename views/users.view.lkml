@@ -110,4 +110,13 @@ view: users {
     type: count
     drill_fields: [id, last_name, first_name, events.count, order_items.count]
   }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+  set: user_details {
+    fields: [id, age, age_bins, city, country, created_raw, email, full_name, state, zip]
+  }
 }

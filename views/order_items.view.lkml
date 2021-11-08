@@ -228,7 +228,7 @@ view: order_items {
     group_label: "Averages"
     description: "Average USD sped per customer"
     type: number
-    sql: ${total_gross_revenue}/${users.count} ;;
+    sql: ${total_gross_revenue}/${users.count_distinct} ;;
     value_format_name: usd
     drill_fields: [detail*]
   }
