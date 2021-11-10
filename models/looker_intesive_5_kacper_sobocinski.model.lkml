@@ -39,10 +39,18 @@ explore: order_items_details {
   }
 }
 
-explore: customers {
+explore: customer_events {
   from: users
   label: "Customers with details"
   view_label: "Customers"
   description: "An explore focusing on customer data"
-  fields: [customers.user_details*]
+  fields: [customer_events.user_details*, events.created_date, events.event_type, events.count]
+
+  join: events {
+    from: events
+    view_label: "Customer events"
+    type: left_outer
+    sql_on: ${customer_events.id} = ${events.user_id} ;;
+    relationship: one_to_many
+  }
 }
